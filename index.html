@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirt Designer</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .container { position: relative; width: 300px; margin: auto; }
+        #tshirt { width: 100%; }
+        #design { position: absolute; top: 50px; left: 50px; width: 100px; cursor: move; }
+    </style>
+</head>
+<body>
+    <h1>Design Your T-Shirt</h1>
+    <div class="container">
+        <img id="tshirt" src="tshirt.png" alt="T-Shirt">
+        <img id="design" src="design.png" alt="Design" draggable="true">
+    </div>
+    <script>
+        let design = document.getElementById("design");
+
+        design.addEventListener("dragstart", (event) => {
+            event.dataTransfer.setData("text/plain", "");
+        });
+
+        document.addEventListener("dragover", (event) => {
+            event.preventDefault();
+        });
+
+        document.addEventListener("drop", (event) => {
+            event.preventDefault();
+            let rect = event.target.getBoundingClientRect();
+            design.style.left = event.clientX - rect.left - 50 + "px";
+            design.style.top = event.clientY - rect.top - 50 + "px";
+        });
+    </script>
+</body>
+</html>
